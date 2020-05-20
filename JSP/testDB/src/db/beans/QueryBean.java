@@ -49,17 +49,19 @@ public class QueryBean {
 		}
 	}
 	
-	public ArrayList getUserInfo() throws Exception {
+	public ArrayList getUserInfo(String strUid) throws Exception {
 		StringBuffer sb = new StringBuffer();
 		
 		sb.append(" SELECT ");
 		sb.append("    U_ID, U_NAME, U_PHONE, U_GRADE, WRITE_TIME ");
 		sb.append(" FROM ");
 		sb.append("    USER_INFO_SAMPLE ");
+		
+		sb.append(" WHERE ");
+		sb.append("    U_ID LIKE '%"+strUid+"%'");
+		
 		sb.append(" ORDER BY ");
 		sb.append("    WRITE_TIME ");
-		
-		System.out.println(sb);
 		
 		rs = stmt.executeQuery(sb.toString());
 		
@@ -75,22 +77,22 @@ public class QueryBean {
 		return res;
 	}
 	
-	public static void main(String[] args) {
-		QueryBean qb = new QueryBean();
-		qb.getConnection();
-		ArrayList users;
-		try {
-			users = qb.getUserInfo();
-			
-			for (int i=0; i<users.size(); i++) {
-				if (i%5 == 0) System.out.println();
-				
-				System.out.print(users.get(i) + "\t");
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
+//	public static void main(String[] args) {
+//		QueryBean qb = new QueryBean();
+//		qb.getConnection();
+//		ArrayList users;
+//		try {
+//			users = qb.getUserInfo();
+//			
+//			for (int i=0; i<users.size(); i++) {
+//				if (i%5 == 0) System.out.println();
+//				
+//				System.out.print(users.get(i) + "\t");
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 }

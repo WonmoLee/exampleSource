@@ -11,7 +11,9 @@
 	
 	request.setCharacterEncoding("UTF-8");
 	
-	
+	String uid = request.getParameter("user_id") == null
+				? ""
+				: request.getParameter("user_id").trim();
 	
 	QueryBean.getConnection();
 	
@@ -19,7 +21,7 @@
 	
 	try
 	{
-		resArr = QueryBean.getUserInfo(); //DB에서 가져온것을 jsp로
+		resArr = QueryBean.getUserInfo(uid); //DB에서 가져온것을 jsp로
 	}
 	catch(Exception e )
 	{
